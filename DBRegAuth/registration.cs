@@ -23,6 +23,7 @@ namespace DBRegAuth
         {
             con1 = new DBCon();
             textBox5_password.PasswordChar= '*';
+            textBox6_confirmpassword.PasswordChar= '*';
             textBox4_login.MaxLength = 50;
             textBox5_password.MaxLength = 50;
             textBox6_confirmpassword.MaxLength = 50;
