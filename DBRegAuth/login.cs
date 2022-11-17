@@ -13,7 +13,7 @@ namespace DBRegAuth
 {
     public partial class login : Form
     {
-        DBCon con1 = new DBCon();
+        DBCon con1;
 
         public login()
         {
@@ -22,6 +22,7 @@ namespace DBRegAuth
 
         private void login_Load(object sender, EventArgs e)
         {
+            con1 = new DBCon();
             textBox_pass.PasswordChar = '*';
             textBox_login.MaxLength = 50;
             textBox_pass.MaxLength = 50;
@@ -38,7 +39,7 @@ namespace DBRegAuth
 
             SqlCommand _comSel2 = new SqlCommand(query);
             _comSel2.Connection = con1.GetCon();
-            _comSel2.ExecuteNonQuery();
+            //_comSel2.ExecuteNonQuery();
 
             SqlDataAdapter _da1 = new SqlDataAdapter(_comSel2);
             DataTable table = new DataTable();
