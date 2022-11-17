@@ -14,7 +14,7 @@ namespace DBRegAuth
     public partial class login : Form
     {
         DBCon con1 = new DBCon();
-        
+
         public login()
         {
             InitializeComponent();
@@ -32,18 +32,25 @@ namespace DBRegAuth
             var login = textBox_login.Text;
             var pass = textBox_pass.Text;
 
+            con1.OpenCon();
 
-            SqlDataAdapter adapter = new SqlDataAdapter();
+            string query = $"Select user_login, user_password from Пользователи where user_login = '{login}' and user_password = '{pass}'";
+
+            SqlCommand _comSel2 = new SqlCommand(query);
+            _comSel2.Connection = con1.GetCon();
+            _comSel2.ExecuteNonQuery();
+
+            SqlDataAdapter _da1 = new SqlDataAdapter(_comSel2);
             DataTable table = new DataTable();
 
-            string query = $"Select user_password from dbo.Пользователи where  user_password = '{pass}'";
+            _da1.Fill(table);
 
-            SqlCommand com1 = new SqlCommand(query, con1.GetCon());
 
-            adapter.SelectCommand = com1;
-            // adapter.Fill(table);
+            /*adapter.SelectCommand = com1;
+            adapter.Fill(table);*/
 
-            MessageBox.Show(table.ToString());
+
+            //MessageBox.Show(table.Rows[0][0].ToString());
 
             if(table.Rows.Count == 1)
             {
