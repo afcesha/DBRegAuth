@@ -38,25 +38,40 @@ namespace DBRegAuth
             var confirmpassword = textBox6_confirmpassword.Text;
 
             con1.OpenCon();
-            if ((surname == " ") || (name == " ") || (fathername == " ") || (usrlogin == " ") || (password == " ") || (confirmpassword == " "))
+            if ((surname.Length == 0) || (name.Length == 0) || (fathername.Length == 0) || (usrlogin.Length == 0) || (password.Length == 0) || (confirmpassword.Length == 0))
             {
-                MessageBox.Show("Заполни все данные", "Дебил", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Заполни все данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                if (password == confirmpassword)
+                string query1 = $"Select login from Пользователи where login = '{usrlogin}'";
+                SqlCommand com2 = new SqlCommand(query1);
+                com2.Connection = con1.GetCon();
+                SqlDataAdapter da1 = new SqlDataAdapter(com2);
+                DataTable table = new DataTable();
+                da1.Fill(table);
+                if (table.Rows.Count != 0)
                 {
-                    string query = $"insert Пользователи ([Фамилия], [Имя], [Отчество], [login], [password]) values (N'{surname}', N'{name}',N'{fathername}', N'{usrlogin}', N'{password}')";
-                    SqlCommand com1 = new SqlCommand(query);
-                    com1.Connection = con1.GetCon();
-                    com1.ExecuteNonQuery();
-                    MessageBox.Show("Молодец", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Hide();
-                    login login = new login();
-                    login.Show();
+                    MessageBox.Show("Такой пользователь уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    
                 }
                 else
-                    MessageBox.Show("Пароли не совпадают", "Дебил", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                { 
+                    if (password == confirmpassword)
+                    {
+                        string query = $"insert Пользователи ([Фамилия], [Имя], [Отчество], [login], [password]) values (N'{surname}', N'{name}',N'{fathername}', N'{usrlogin}', N'{password}')";
+                        SqlCommand com1 = new SqlCommand(query);
+                        com1.Connection = con1.GetCon();
+                        com1.ExecuteNonQuery();
+                        MessageBox.Show("Молодец", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Hide();
+                        login login = new login();
+                        login.Show();
+                    }
+                    else
+                        MessageBox.Show("Пароли не совпадают", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
             }
                 
 
