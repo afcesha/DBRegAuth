@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Reflection.Emit;
 
 namespace DBRegAuth
 {
@@ -30,35 +31,56 @@ namespace DBRegAuth
         private void button1_Click(object sender, EventArgs e)
         {
 
-            var login = textBox_login.Text;
-            var pass = textBox_pass.Text;
+            var usrlogin = textBox_login.Text;
+            var usrpass = textBox_pass.Text;
 
             con1.OpenCon();
 
-            string query = $"Select user_login, user_password from Пользователи where user_login = '{login}' and user_password = '{pass}'";
+            string query = $"Select login, password from Пользователи where login = '{usrlogin}' and password = '{usrpass}'";
+            string query1 = $"Select Имя from Пользователи where login = '{usrlogin}'";
 
-            SqlCommand _comSel2 = new SqlCommand(query);
-            _comSel2.Connection = con1.GetCon();
-            //_comSel2.ExecuteNonQuery();
-
-            SqlDataAdapter _da1 = new SqlDataAdapter(_comSel2);
+            SqlCommand com1 = new SqlCommand(query);
+            com1.Connection = con1.GetCon();
+            SqlDataAdapter da1 = new SqlDataAdapter(com1);
             DataTable table = new DataTable();
+            da1.Fill(table);
 
-            _da1.Fill(table);
+            SqlCommand com2 = new SqlCommand(query1);
+            com2.Connection = con1.GetCon();
+            SqlDataAdapter da2 = new SqlDataAdapter(com2);
+            DataTable table1 = new DataTable();
+            da2.Fill(table1);
+
+
+
+
+
 
 
             /*adapter.SelectCommand = com1;
             adapter.Fill(table);*/
 
 
-            //MessageBox.Show(table.Rows[0][0].ToString());
+            //MessageBox.Show(table1.Rows[0][0].ToString());
 
-            if(table.Rows.Count == 1)
+            if (table.Rows.Count == 1)
             {
                 MessageBox.Show("Молодец","Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                main main = new main();
+                this.Hide();
+                main.label1.Text = "Добро пожаловать, " + table1.Rows[0][0];
+                main.ShowDialog();
+                
             }
             else
                 MessageBox.Show("Не молодец", "Дебил", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            registration registration = new registration();
+            this.Hide();
+            registration.ShowDialog();
         }
     }
 }
