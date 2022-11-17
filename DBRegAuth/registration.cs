@@ -45,7 +45,7 @@ namespace DBRegAuth
             {
                 if (password == confirmpassword)
                 {
-                    string query = $"insert Пользователи ([Фамилия], [Имя], [Отчество], [login], [password]) values ('{surname}', '{name}','{fathername}', '{usrlogin}', '{password}')";
+                    string query = $"insert Пользователи ([Фамилия], [Имя], [Отчество], [login], [password]) values (N'{surname}', N'{name}',N'{fathername}', N'{usrlogin}', N'{password}')";
                     SqlCommand com1 = new SqlCommand(query);
                     com1.Connection = con1.GetCon();
                     com1.ExecuteNonQuery();
