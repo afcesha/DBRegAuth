@@ -73,7 +73,7 @@ namespace DBRegAuth
                 
             }
             else
-                MessageBox.Show("Не молодец", "Дебил", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Данные введены неправильно или такого пользователя не существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
