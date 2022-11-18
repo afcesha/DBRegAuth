@@ -69,11 +69,13 @@ namespace DBRegAuth
                 main main = new main();
                 this.Hide();
                 main.label1.Text = "Добро пожаловать, " + table1.Rows[0][0];
+                main.deletelogin = usrlogin.ToString();
                 main.ShowDialog();
                 
             }
             else
                 MessageBox.Show("Данные введены неправильно или такого пользователя не существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            con1.CloseCon();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

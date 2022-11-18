@@ -52,6 +52,8 @@ namespace DBRegAuth
             this.textBox_login.Name = "textBox_login";
             this.textBox_login.Size = new System.Drawing.Size(236, 20);
             this.textBox_login.TabIndex = 1;
+            this.textBox_login.Text = "Введите логин";
+            this.textBox_login.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox_pass
             // 
@@ -59,6 +61,8 @@ namespace DBRegAuth
             this.textBox_pass.Name = "textBox_pass";
             this.textBox_pass.Size = new System.Drawing.Size(236, 20);
             this.textBox_pass.TabIndex = 2;
+            this.textBox_pass.Text = "Введите пароль";
+            this.textBox_pass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // authlabel
             // 

@@ -24,9 +24,13 @@ namespace DBRegAuth
             con1 = new DBCon();
             textBox5_password.PasswordChar= '*';
             textBox6_confirmpassword.PasswordChar= '*';
+            textBox1_surname.MaxLength = 50;
+            textBox2_name.MaxLength = 50;
+            textBox3_fathername.MaxLength = 50;
             textBox4_login.MaxLength = 50;
             textBox5_password.MaxLength = 50;
             textBox6_confirmpassword.MaxLength = 50;
+            
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -36,9 +40,10 @@ namespace DBRegAuth
             var usrlogin = textBox4_login.Text;
             var password = textBox5_password.Text;
             var confirmpassword = textBox6_confirmpassword.Text;
+            var birthday = maskedTextBox1_birthday.Text;
 
             con1.OpenCon();
-            if ((surname.Length == 0) || (name.Length == 0) || (fathername.Length == 0) || (usrlogin.Length == 0) || (password.Length == 0) || (confirmpassword.Length == 0))
+            if ((surname.Length == 0) || (name.Length == 0) || (fathername.Length == 0) || (usrlogin.Length == 0) || (password.Length == 0) || (confirmpassword.Length == 0) || (birthday.Length == 0))
             {
                 MessageBox.Show("Заполни все данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -59,7 +64,7 @@ namespace DBRegAuth
                 { 
                     if (password == confirmpassword)
                     {
-                        string query = $"insert Пользователи ([Фамилия], [Имя], [Отчество], [login], [password]) values (N'{surname}', N'{name}',N'{fathername}', N'{usrlogin}', N'{password}')";
+                        string query = $"insert Пользователи ([Фамилия], [Имя], [Отчество],[Дата_рождения], [login], [password]) values (N'{surname}', N'{name}',N'{fathername}','{birthday}', N'{usrlogin}', N'{password}')";
                         SqlCommand com1 = new SqlCommand(query);
                         com1.Connection = con1.GetCon();
                         com1.ExecuteNonQuery();
@@ -73,9 +78,17 @@ namespace DBRegAuth
 
                 }
             }
-                
+            con1.CloseCon();
 
 
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            login login = new login();
+            login.Show();
         }
     }
 }
