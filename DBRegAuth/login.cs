@@ -36,8 +36,9 @@ namespace DBRegAuth
 
             con1.OpenCon();
 
-            string query = $"Select login, password from Пользователи where login = '{usrlogin}' and password = '{usrpass}'";
-            string query1 = $"Select Имя from Пользователи where login = '{usrlogin}'";
+            string query = $"Select user_login, user_password from Пользователи where user_login = '{usrlogin}' and user_password = '{usrpass}'";
+            string query1 = $"Select Имя from Пользователи where user_login = '{usrlogin}'";
+            string query2 = $"Select Код_пользователя from Пользователи where user_login = '{usrlogin}'";
 
             SqlCommand com1 = new SqlCommand(query);
             com1.Connection = con1.GetCon();
@@ -50,18 +51,16 @@ namespace DBRegAuth
             SqlDataAdapter da2 = new SqlDataAdapter(com2);
             DataTable table1 = new DataTable();
             da2.Fill(table1);
+            SqlCommand com3 = new SqlCommand(query2);
+            com3.Connection = con1.GetCon();
+            SqlDataAdapter da3 = new SqlDataAdapter(com3);
+            DataTable table2 = new DataTable();
+            da3.Fill(table2);
+            string pizda = table2.Rows[0][0].ToString();
+            int piska = Convert.ToInt32(pizda);
+            
 
 
-
-
-
-
-
-            /*adapter.SelectCommand = com1;
-            adapter.Fill(table);*/
-
-
-            //MessageBox.Show(table1.Rows[0][0].ToString());
 
             if (table.Rows.Count == 1)
             {
@@ -83,6 +82,11 @@ namespace DBRegAuth
             registration registration = new registration();
             this.Hide();
             registration.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

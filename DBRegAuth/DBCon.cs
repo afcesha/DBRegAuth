@@ -9,25 +9,25 @@ namespace DBRegAuth
 {
     class DBCon
     {
-        SqlConnection con1 = new SqlConnection(@"Data Source = NAYASHOV; Database = 007v2Nayashov; Integrated Security=true;");
+        public static SqlConnection connection = new SqlConnection(@"Data Source = NAYASHOV; Database = Nayashov007v2; Integrated Security=true;");
 
         public void OpenCon()
         {
-            if (con1.State == System.Data.ConnectionState.Closed)
+            if (connection.State == System.Data.ConnectionState.Closed)
             {
-                con1.Open();
+                connection.Open();
             }
         }
         public void CloseCon()
         {
-            if (con1.State == System.Data.ConnectionState.Open)
+            if (connection.State == System.Data.ConnectionState.Open)
             {
-                con1.Close();
+                connection.Close();
             }
         }
         public SqlConnection GetCon()
         {
-            return con1;
+            return connection;
         }
     }
 }

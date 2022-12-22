@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DBRegAuth
 {
@@ -21,8 +22,11 @@ namespace DBRegAuth
         private void main_Load(object sender, EventArgs e)
         {
             con1 = new DBCon();
+            seance_list();
+         
         }
-        public string deletelogin = "";
+        public static string deletelogin = "";
+        public static int usercode;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -38,7 +42,7 @@ namespace DBRegAuth
             if (del== DialogResult.Yes)
             {
                 con1.OpenCon();
-                string query = $"Delete from Пользователи where login = '{deletelogin}'";
+                string query = $"Delete from Пользователи where user_login = '{deletelogin}'";
                 SqlCommand com1 = new SqlCommand(query);
                 com1.Connection = con1.GetCon();
                 com1.ExecuteNonQuery();
@@ -48,6 +52,31 @@ namespace DBRegAuth
                 login.Show();
             }
             
+        }
+
+        private void seance_list()
+        {
+            string seance_query = $"SELECT Сеансы.Код_сеанса, Сеансы.Код_кинозала, Сеансы.Дата, " +
+                "Сеансы.Время, Фильмы.Название FROM Сеансы " +
+                "JOIN Фильмы ON Сеансы.Код_фильма = Фильмы.Код_фильма";
+
+            SqlCommand com2 = new SqlCommand(seance_query);
+            com2.CommandType = CommandType.Text;
+            com2.Connection = con1.GetCon();
+            SqlDataAdapter da1 = new SqlDataAdapter(com2);
+            DataTable table = new DataTable();
+            da1.Fill(table);
+            comboBox_seance.DisplayMember = "Код_сеанса";
+            comboBox_seance.ValueMember = "Код_сеанса";
+            comboBox_seance.DataSource = table;
+            dataGridView1.DataSource = table;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            seance_places seance_Places = new seance_places(Convert.ToInt32(comboBox_seance.SelectedValue));
+            this.Hide();
+            seance_Places.Show();
         }
     }
 }

@@ -34,6 +34,9 @@ namespace DBRegAuth
             this.textBox_pass = new System.Windows.Forms.TextBox();
             this.authlabel = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -52,7 +55,6 @@ namespace DBRegAuth
             this.textBox_login.Name = "textBox_login";
             this.textBox_login.Size = new System.Drawing.Size(236, 20);
             this.textBox_login.TabIndex = 1;
-            this.textBox_login.Text = "Введите логин";
             this.textBox_login.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox_pass
@@ -61,7 +63,6 @@ namespace DBRegAuth
             this.textBox_pass.Name = "textBox_pass";
             this.textBox_pass.Size = new System.Drawing.Size(236, 20);
             this.textBox_pass.TabIndex = 2;
-            this.textBox_pass.Text = "Введите пароль";
             this.textBox_pass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // authlabel
@@ -85,11 +86,44 @@ namespace DBRegAuth
             this.linkLabel1.Text = "Вы еще не смешарик?";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(359, 152);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 16);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Введите пароль";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(359, 101);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 16);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Введите логин";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(711, 397);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Выход";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.authlabel);
             this.Controls.Add(this.textBox_pass);
@@ -110,5 +144,8 @@ namespace DBRegAuth
         private System.Windows.Forms.TextBox textBox_pass;
         private System.Windows.Forms.Label authlabel;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button2;
     }
 }
