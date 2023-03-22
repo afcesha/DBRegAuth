@@ -49,7 +49,7 @@ namespace DBRegAuth
             }
             else
             {
-                string query1 = $"Select user_login from Пользователи where user_login = '{usrlogin}'";
+                string query1 = $"Select login from Users where login = '{usrlogin}'";
                 SqlCommand com2 = new SqlCommand(query1);
                 com2.Connection = con1.GetCon();
                 SqlDataAdapter da1 = new SqlDataAdapter(com2);
@@ -64,7 +64,7 @@ namespace DBRegAuth
                 { 
                     if (password == confirmpassword)
                     {
-                        string query = $"insert Пользователи ([Фамилия], [Имя], [Отчество],[Дата_рождения], [user_login], [user_password]) values ('{surname}', '{name}','{fathername}','{birthday}', '{usrlogin}', '{password}')";
+                        string query = $"insert users ([Фамилия], [Имя], [Отчество],[Дата_рождения], [login], [password]) values ('{surname}', '{name}','{fathername}','{birthday}', '{usrlogin}', '{password}')";
                         SqlCommand com1 = new SqlCommand(query);
                         com1.Connection = con1.GetCon();
                         com1.ExecuteNonQuery();

@@ -36,9 +36,9 @@ namespace DBRegAuth
 
             con1.OpenCon();
 
-            string query = $"Select user_login, user_password from Пользователи where user_login = '{usrlogin}' and user_password = '{usrpass}'";
-            string query1 = $"Select Имя from Пользователи where user_login = '{usrlogin}'";
-            string query2 = $"Select Код_пользователя from Пользователи where user_login = '{usrlogin}'";
+            string query = $"Select login, password from Users where login = '{usrlogin}' and password = '{usrpass}'";
+            string query1 = $"Select Имя from Users where login = '{usrlogin}'";
+            string query2 = $"Select id_users from Users where login = '{usrlogin}'";
 
             SqlCommand com1 = new SqlCommand(query);
             com1.Connection = con1.GetCon();

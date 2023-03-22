@@ -9,7 +9,7 @@ namespace DBRegAuth
 {
     class DBCon
     {
-        public static SqlConnection connection = new SqlConnection(@"Data Source = NAYASHOV; Database = Nayashov007v2; Integrated Security=true;");
+        public static SqlConnection connection = new SqlConnection(@"Data Source = DBSRV\gor2022; Database = Avtozvyk; Integrated Security=true;");
 
         public void OpenCon()
         {
